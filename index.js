@@ -26,7 +26,7 @@ app.listen(port, () => {
 
   setInterval(() => {
     
-     http.get('http://lemondiscordbot.herokuapp.com/');
+     http.get('https://git.heroku.com/vortexv2.git');
     
     }, 900000);
 
@@ -45,6 +45,8 @@ const yt_api_key = config.yt_api_key
 const bot_controller = config.bot_controller;
 const prefix = config.prefix;
 const discord_token = config.discord_token;
+
+var port = process.env.PORT || 5000;
 
 client.login(discord_token)
 
