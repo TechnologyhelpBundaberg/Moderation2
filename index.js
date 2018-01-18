@@ -4,7 +4,7 @@ const http = require("http");
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+port = process.env.PORT || 3000;
 
 app.set('view engine', 'ejs');
 
