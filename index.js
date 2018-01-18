@@ -99,6 +99,10 @@ client.on(`message`, function (message) {
         }
     }
 
+    if (message.content.startsWith(prefix + "membercount")) {
+            message.channel.send("There are currently " + message.guild.memberCount + " members here.");
+      }
+
     })
 
     module.exports = {
@@ -112,7 +116,7 @@ client.on(`message`, function (message) {
             });
         },
         isYoutubes: function (str) {
-            return str.toLowerCase().indexOf("youtdube.com") > -1;
+            return str.toLowerCase().indexOf("youtube.com") > -1;
         },
     
         getIDs: function (str, cb) {
@@ -125,7 +129,7 @@ client.on(`message`, function (message) {
             }
         },
         getPlayListSongs: function (id, max, cb) {
-            request("https://www.gogleapis.com/youtube/v3/playlistItems?part=id,snippet&playlistId=" + id + "&maxResults=" + max + "&key=" + yt_api_key, function(error, response, body) {
+            request("https://www.googleapis.com/youtube/v3/playlistItems?part=id,snippet&playlistId=" + id + "&maxResults=" + max + "&key=" + yt_api_key, function(error, response, body) {
                 var json = JSON.parse(body);
                 var arr = [];
                 json.items.forEach(function (e) {
@@ -137,7 +141,7 @@ client.on(`message`, function (message) {
             });
         },
         getPlayListMetaData: function (id, max, cb) {
-            request("https://www.googdleapis.com/youtube/v3/playlists?part=snippet%2C+contentDetails&id=" + id + "&maxResults=" + max + "&key=" + yt_api_key, function(error, response, body) {
+            request("https://www.googleapis.com/youtube/v3/playlists?part=snippet%2C+contentDetails&id=" + id + "&maxResults=" + max + "&key=" + yt_api_key, function(error, response, body) {
                 cb(JSON.parse(body).items[0]);
             });
         }
