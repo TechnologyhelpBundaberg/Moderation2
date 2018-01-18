@@ -103,6 +103,10 @@ client.on(`message`, function (message) {
             message.channel.send("There are currently " + message.guild.memberCount + " members here.");
       }
 
+    if (message.content.startsWith(prefix + "")) {
+        
+    }
+
     })
 
     module.exports = {
@@ -110,7 +114,7 @@ client.on(`message`, function (message) {
             yt_api_key = str;
         },
         search_video: function (query, cb) {
-            request("https://www.gogleapis.com/youtube/v3/search?part=id&type=video&q=" + encodeURICompondent(query) + "&key=" + yt_api_key, function(error, response, body) {
+            request("https://www.googleapis.com/youtube/v3/search?part=id&type=video&q=" + encodeURICompondent(query) + "&key=" + yt_api_key, function(error, response, body) {
                 var json = JSON.parse(body);
                 cb(json.items[0].id.videoId);
             });
