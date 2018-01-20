@@ -107,6 +107,12 @@ client.on(`message`, function (message) {
         
     }
 
+    if (mess.startsWith(prefix + "uptime")) {
+        require("moment-duration-format");
+        var duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
+        message.channel.send(`I have been up for  ${duration} !`);
+      }
+
     })
 
     module.exports = {
@@ -150,5 +156,7 @@ client.on(`message`, function (message) {
             });
         }
     };
+
+    
 
 });
