@@ -20,7 +20,7 @@ app.get('/', (request, response) => {
   
 app.listen(port, () => {
 
-      console.log('Our app is running on http://localhost/:' + port);
+      console.log('Vortex is running on http://localhost/:' + port + "!!");;
   
   });
 
@@ -103,15 +103,78 @@ client.on(`message`, function (message) {
             message.channel.send("There are currently " + message.guild.memberCount + " members here.");
       }
 
-    if (message.content.startsWith(prefix + "")) {
-        
-    }
-
     if (mess.startsWith(prefix + "uptime")) {
         require("moment-duration-format");
         var duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
         message.channel.send(`I have been up for  ${duration} !`);
       }
+
+    if (message.content.startsWith(prefix + "hidden")) {
+        message.channel.send("What Do You Want?")
+      const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
+      collector.on('collect', collected => { // When a message is collected, this event triggers.
+              if(collected.content.toLowerCase() === 'nothing') { // If response is 'no'
+              collector.stop(); // Stop the collector.
+                message.channel.send('Okay then....'); // Send a message.
+              }else if(collected.content.toLowerCase() === 'something') { // If response is 'yes'
+              collector.stop(); // Stop the collector.
+              message.channel.send('Fine You Found The Hidden Command! *Nice Job*');
+              }
+            })
+            collector.on('end', collected => { // When the 30 seconds runs out.
+              if(collected.size < 1) return message.channel.send(`WHY SAY SOMETHING THEN IGNORE ME ***ANGERY!!!!!!***`); // If no response, send a message.
+            });
+    }    
+
+    if (message.content.startsWith(prefix + "mute")) {
+        message.channel.send("Do you want to mute" + message.mentions.users.first() + "?  *Reply with* ***Yes*** *or* ***No***")
+      const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
+      collector.on('collect', collected => { // When a message is collected, this event triggers.
+              if(collected.content.toLowerCase() === 'No') { // If response is 'no'
+              collector.stop(); // Stop the collector.
+                message.channel.send('Okay then....'); // Send a message.
+              }else if(collected.content.toLowerCase() === 'Yes') { // If response is 'yes'
+              collector.stop(); // Stop the collector.
+                var adminmute = message.guild.roles.find('name', '257673064446164992');
+                  if(message.member.roles.has(adminmute.id)) {
+                    const toMute = message.guild.member(message.mentions.users.first());
+                      toMute.addRole('404561198416396309');
+                  } else(message.channel.send("You Cannot use that command"));     
+              }
+            })
+            collector.on('end', collected => { // When the 30 seconds runs out.
+              if(collected.size < 1) return message.channel.send(`WHY SAY SOMETHING THEN IGNORE ME ***ANGERY!!!!!!***`); // If no response, send a message.
+            });
+    } 
+
+    if (message.content.startsWith(prefix + "oof?")) {
+        message.channel.send("Do you want to know what oof means? say **Yes** or **No**")
+        const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
+        collector.on('collect', collected => { // When a message is collected, this event triggers.
+                if(collected.content.toLowerCase() === 'No') { // If response is 'no'
+                collector.stop(); // Stop the collector.
+                  message.channel.send('Then why oof-ing ask?'); // Send a message.
+                }else if(collected.content.toLowerCase() === `Yes`) { // If response is 'yes'
+                collector.stop(); // Stop the collector.
+                message.channel.send('V V V I will list all links below! V V V');
+                setTimeout(function(){
+                    message.channel.send(`Heres a Urban Dictionary: https://www.urbandictionary.com/define.php?term=oof`)
+                  },2000);
+                  setTimeout(function(){
+                    message.channel.send(`Heres a Youtube link to **OOF**: https://www.youtube.com/watch?v=joYBr5jaKbE`)
+                  },4000);
+                  setTimeout(function(){
+                    message.channel.send(`Checking All Links Allow 4 Seconds to Check!`)
+                  },6000);
+                  setTimeout(function(){
+                    message.channel.send(`Links Checked! All done!`)
+                  },10000);
+                }
+              })
+              collector.on('end', collected => { // When the 30 seconds runs out.
+                if(collected.size < 1) return message.channel.send(`Message collection error ***UNDEFINED*** Id = "Too Long To Reply" Please send command again`); // If no response, send a message.
+              });
+    }
 
     })
 
