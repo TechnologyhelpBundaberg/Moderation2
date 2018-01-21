@@ -127,23 +127,24 @@ client.on(`message`, function (message) {
     }    
 
     if (message.content.startsWith(prefix + "mute")) {
-        message.channel.send("Do you want to mute" + message.mentions.users.first() + "?  *Reply with* ***Yes*** *or* ***No***")
+        message.channel.send("Do you want to mute" + message.mentions.users.first() + "?  *Reply with* ***Y*** *or* ***N***")
       const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
       collector.on('collect', collected => { // When a message is collected, this event triggers.
-              if(collected.content.toLowerCase() === 'No') { // If response is 'no'
+              if(collected.content.toLowerCase() === 'N') { // If response is 'no'
               collector.stop(); // Stop the collector.
-                message.channel.send('Okay then....'); // Send a message.
-              }else if(collected.content.toLowerCase() === 'Yes') { // If response is 'yes'
+                message.channel.send('Okay then.... ***Aborted***'); // Send a message.
+                console.log("Testing No")
+              }else if(collected.content.toLowerCase() === 'Y') { // If response is 'yes'
               collector.stop(); // Stop the collector.
-                var adminmute = message.guild.roles.find('name', '257673064446164992');
+                var adminmute = message.guild.roles.find('name', 'Owner');
                   if(message.member.roles.has(adminmute.id)) {
                     const toMute = message.guild.member(message.mentions.users.first());
-                      toMute.addRole('404561198416396309');
+                      toMute.addRole('Muted');
                   } else(message.channel.send("You Cannot use that command"));     
               }
             })
             collector.on('end', collected => { // When the 30 seconds runs out.
-              if(collected.size < 1) return message.channel.send(`WHY SAY SOMETHING THEN IGNORE ME ***ANGERY!!!!!!***`); // If no response, send a message.
+              if(collected.size < 1) return message.channel.send(`Mute Command Aborted!`); // If no response, send a message.
             });
     } 
 
