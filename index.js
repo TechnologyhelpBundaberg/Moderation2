@@ -126,21 +126,57 @@ client.on(`message`, function (message) {
             });
     }    
 
-    if (message.content.startsWith(prefix + "mute")) {
-        message.channel.send("Do you want to mute" + message.mentions.users.first() + "?  *Reply with* ***Y*** *or* ***N***")
+    if (message.content.startsWith(prefix + "5278")) {
+        message.channel.send("Do you want to mute " + message.mentions.users.first() + "?  *Reply with* ***1 For Yes*** *or* ***2 For No***")
       const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
       collector.on('collect', collected => { // When a message is collected, this event triggers.
-              if(collected.content.toLowerCase() === 'N') { // If response is 'no'
+              if(collected.content.toLowerCase() === '2') { // If response is 'no'
               collector.stop(); // Stop the collector.
                 message.channel.send('Okay then.... ***Aborted***'); // Send a message.
                 console.log("Testing No")
-              }else if(collected.content.toLowerCase() === 'Y') { // If response is 'yes'
+              }else if(collected.content.toLowerCase() === '1') { // If response is 'yes'
               collector.stop(); // Stop the collector.
-                var adminmute = message.guild.roles.find('name', 'Owner');
+                var adminmute = message.guild.roles.find('name', '');
                   if(message.member.roles.has(adminmute.id)) {
                     const toMute = message.guild.member(message.mentions.users.first());
-                      toMute.addRole('Muted');
+                      toMute.addRole('404561198416396309');
+                      setTimeout(function(){
+                        toMute.removeRole('335020737108639744')
+                      },14400000);
+
                   } else(message.channel.send("You Cannot use that command"));     
+              }
+            })
+            collector.on('end', collected => { // When the 30 seconds runs out.
+              if(collected.size < 1) return message.channel.send(`Mute Command Aborted!`); // If no response, send a message.
+            });
+    } 
+
+    if (message.content.startsWith(prefix + "mute")) {
+        message.channel.send("Do you want to mute " + message.mentions.users.first() + "?  *Reply with* ***1 For Yes*** *or* ***2 For No***")
+      collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
+      collector.on('collect', collected => { // When a message is collected, this event triggers.
+              if(collected.content.toLowerCase() === '2') { // If response is 'no'
+              collector.stop(); // Stop the collector.
+                message.channel.send('Okay then.... ***Aborted***'); // Send a message.
+              }else if(collected.content.toLowerCase() === '1') { // If response is 'yes'
+              collector.stop(); // Stop the collector.    
+              message.channel.send("Muting Will Last 4 Hours.. *Are You Sure You Want To Mute* " + message.mentions.users.first() + " *?* ***1 For Yes*** *or* ***2 For No***")
+                if(collected.content.toLowerCase() === '2') { // If response is 'no'
+                collector.stop(); // Stop the collector.
+                  message.channel.send('Okay then.... ***Aborted***'); // Send a message.
+                }else if(collected.content.toLowerCase() === '1') { // If response is 'yes'
+                collector.stop(); // Stop the collector.
+                  var adminmute = message.guild.roles.find('name', 'Owner');
+                    if(message.member.roles.has(adminmute.id)) {
+                      const toMute = message.guild.member(message.mentions.users.first());
+                        toMute.addRole('404561198416396309');
+                        setTimeout(function(){
+                          toMute.removeRole('404561198416396309')
+                        },14400000);
+  
+                    } else(message.channel.send("You Cannot use that command"));    
+                  }
               }
             })
             collector.on('end', collected => { // When the 30 seconds runs out.
@@ -152,10 +188,10 @@ client.on(`message`, function (message) {
         message.channel.send("Do you want to know what oof means? say **Yes** or **No**")
         const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
         collector.on('collect', collected => { // When a message is collected, this event triggers.
-                if(collected.content.toLowerCase() === 'No') { // If response is 'no'
+                if(collected.content.toLowerCase() === 'no') { // If response is 'no'
                 collector.stop(); // Stop the collector.
                   message.channel.send('Then why oof-ing ask?'); // Send a message.
-                }else if(collected.content.toLowerCase() === `Yes`) { // If response is 'yes'
+                }else if(collected.content.toLowerCase() === `yes`) { // If response is 'yes'
                 collector.stop(); // Stop the collector.
                 message.channel.send('V V V I will list all links below! V V V');
                 setTimeout(function(){
