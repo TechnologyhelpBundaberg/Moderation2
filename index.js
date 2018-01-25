@@ -306,13 +306,12 @@ client.on(`message`, function (message) {
         }, 10000);
       })
     }
-   
-    if (message.content.startsWith("stfu")) {
-      message.channel.send("stfu")
-      message.channel.send("stfu")
-      message.channel.send("stfu")
-    }
+  
 
+
+
+
+    
 
     })
 
