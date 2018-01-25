@@ -4,8 +4,8 @@
   "description": "VortexV2",
   "main": "index.js",
   "dependencies": {
-    "client": "^0.0.1",
-    "discord.js": "^11.2.1",
+    "client": "0.0.1",
+    "discord.js": "^11.3.0",
     "ejs": "^2.5.7",
     "enmap": "^0.4.2",
     "enmap-level": "^1.0.0",
@@ -14,14 +14,14 @@
     "get-youtube-id": "^1.0.0",
     "http": "0.0.0",
     "moment": "^2.20.1",
-    "moment-duration-format": "^2.0.1",
+    "moment-duration-format": "^2.2.1",
     "node-opus": "^0.2.7",
     "opus": "0.0.0",
     "opusscript": "0.0.6",
     "request": "^2.83.0",
     "youtube-info": "^1.1.2",
     "ytdl": "^0.8.0",
-    "ytdl-core": "^0.18.4"
+    "ytdl-core": "^0.18.7"
   },
   "devDependencies": {},
   "scripts": {
