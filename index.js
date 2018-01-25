@@ -39,6 +39,8 @@ const getYouTubeID = require(`get-youtube-id`);
 const fetchVideoInfo = require(`youtube-info`);
 const moment = require(`moment`);
 
+require('./util/eventLoader')(client);
+
 var config = JSON.parse(fs.readFileSync(`./settings.json`, `utf-8`));
 
 const yt_api_key = config.yt_api_key
@@ -51,10 +53,13 @@ var port = process.env.PORT || 5000;
 client.login(discord_token)
 
 client.on(`ready`, function () {
-    console.log(client.commands);
-    setTimeout(function(){
-       console.log(`Booting Into Version 0.0.1`)
-   },500);
+  console.log(client.commands);
+  setTimeout(function(){
+     console.log(`Booting Into Version 0.1.6`)
+  },500);
+  setTimeout(function(){
+    console.log(`Now With Muting! Do Vortex, mute @{usernameHere}`)
+  },1000);
 
 client.on(`guildMemberAdd`, member => {
     let guild = member.guild;
@@ -91,7 +96,7 @@ client.on(`message`, function (message) {
       }
 
       if(message.content.startsWith(prefix + `purge`)) {
-        var adm = message.guild.roles.find(`name`, `Special Bot`);
+        var adm = message.guild.roles.find(`name`, `Owner`);
         if(message.member.roles.has(adm.id)) {
            var messagecount = args;
             message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
@@ -111,7 +116,7 @@ client.on(`message`, function (message) {
 
     if (message.content.startsWith(prefix + "hidden")) {
         message.channel.send("What Do You Want?")
-      const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
+      const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 15000}); // Create the message collector locked to the author in the message channel.
       collector.on('collect', collected => { // When a message is collected, this event triggers.
               if(collected.content.toLowerCase() === 'nothing') { // If response is 'no'
               collector.stop(); // Stop the collector.
@@ -128,7 +133,7 @@ client.on(`message`, function (message) {
 
     if (message.content.startsWith(prefix + "5278")) {
         message.channel.send("Do you want to mute " + message.mentions.users.first() + "?  *Reply with* ***1 For Yes*** *or* ***2 For No***")
-      const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
+      const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 15000}); // Create the message collector locked to the author in the message channel.
       collector.on('collect', collected => { // When a message is collected, this event triggers.
               if(collected.content.toLowerCase() === '2') { // If response is 'no'
               collector.stop(); // Stop the collector.
@@ -153,40 +158,44 @@ client.on(`message`, function (message) {
     } 
 
     if (message.content.startsWith(prefix + "mute")) {
-        message.channel.send("Do you want to mute " + message.mentions.users.first() + "?  *Reply with* ***1 For Yes*** *or* ***2 For No***")
-      collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
+        message.channel.send("Do you want to mute " + message.mentions.users.first() + "?  *Reply with* ***Yes*** *or* ***No***")
+      collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 15000}); // Create the message collector locked to the author in the message channel.
       collector.on('collect', collected => { // When a message is collected, this event triggers.
-              if(collected.content.toLowerCase() === '2') { // If response is 'no'
+              if(collected.content.toLowerCase() === 'no') { // If response is 'no'
               collector.stop(); // Stop the collector.
                 message.channel.send('Okay then.... ***Aborted***'); // Send a message.
-              }else if(collected.content.toLowerCase() === '1') { // If response is 'yes'
-              collector.stop(); // Stop the collector.    
-              message.channel.send("Muting Will Last 4 Hours.. *Are You Sure You Want To Mute* " + message.mentions.users.first() + " *?* ***1 For Yes*** *or* ***2 For No***")
-                if(collected.content.toLowerCase() === '2') { // If response is 'no'
-                collector.stop(); // Stop the collector.
-                  message.channel.send('Okay then.... ***Aborted***'); // Send a message.
-                }else if(collected.content.toLowerCase() === '1') { // If response is 'yes'
-                collector.stop(); // Stop the collector.
-                  var adminmute = message.guild.roles.find('name', 'Owner');
-                    if(message.member.roles.has(adminmute.id)) {
-                      const toMute = message.guild.member(message.mentions.users.first());
-                        toMute.addRole('404561198416396309');
-                        setTimeout(function(){
-                          toMute.removeRole('404561198416396309')
-                        },14400000);
-  
-                    } else(message.channel.send("You Cannot use that command"));    
-                  }
-              }
+              }else if(collected.content.toLowerCase() === 'yes') { // If response is 'yes'
+              collector.stop(); // Stop the collector.                  
+                      setTimeout(function(){
+                        message.channel.send("User is Being Muted")
+                      },500);
+                      setTimeout(function(){
+                        var adminmute = message.guild.roles.find('name', 'Owner');
+                          if(message.member.roles.has(adminmute.id)) {
+                            const toMute = message.guild.member(message.mentions.users.first());
+                          toMute.addRole('404561198416396309');
+                        }
+                      },5000);
+                      setTimeout(function(){
+                        message.channel.send(message.mentions.users.first() + " Has been muted for 4 hours")
+                      },6800);
+                      setTimeout(function(){
+                        message.channel.send(message.mentions.users.first() + " **Has Been Logged**")
+                      },8000);
+                      setTimeout(function(){
+                        toMute.removeRole('404561198416396309')
+                      },14400000);
+                  } else(message.channel.send("You Cannot use that command! Error id = **No Owner Id Found. . .**"));
             })
             collector.on('end', collected => { // When the 30 seconds runs out.
-              if(collected.size < 1) return message.channel.send(`Mute Command Aborted!`); // If no response, send a message.
+              if(collected.size < 1) return message.channel.send(`Mute Command Aborted! Error id = **Took Too Long To Respond. . . Try Again. . .**`); // If no response, send a message.
             });
     } 
 
+    
     if (message.content.startsWith(prefix + "oof?")) {
         message.channel.send("Do you want to know what oof means? say **Yes** or **No**")
-        const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 30000}); // Create the message collector locked to the author in the message channel.
+        const collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 15000}); // Create the message collector locked to the author in the message channel.
         collector.on('collect', collected => { // When a message is collected, this event triggers.
                 if(collected.content.toLowerCase() === 'no') { // If response is 'no'
                 collector.stop(); // Stop the collector.
@@ -211,52 +220,9 @@ client.on(`message`, function (message) {
               collector.on('end', collected => { // When the 30 seconds runs out.
                 if(collected.size < 1) return message.channel.send(`Message collection error ***UNDEFINED*** Id = "Too Long To Reply" Please send command again`); // If no response, send a message.
               });
-    }
+    } 
+
 
     })
-
-    module.exports = {
-        setApiKey: function (str) {
-            yt_api_key = str;
-        },
-        search_video: function (query, cb) {
-            request("https://www.googleapis.com/youtube/v3/search?part=id&type=video&q=" + encodeURICompondent(query) + "&key=" + yt_api_key, function(error, response, body) {
-                var json = JSON.parse(body);
-                cb(json.items[0].id.videoId);
-            });
-        },
-        isYoutubes: function (str) {
-            return str.toLowerCase().indexOf("youtube.com") > -1;
-        },
-    
-        getIDs: function (str, cb) {
-            if (this.isYoutube(str)) {
-                cb(getYouTubeID(str));
-            } else {
-                this.search_video(str, function(id) {
-                    cb(id);
-                });
-            }
-        },
-        getPlayListSongs: function (id, max, cb) {
-            request("https://www.googleapis.com/youtube/v3/playlistItems?part=id,snippet&playlistId=" + id + "&maxResults=" + max + "&key=" + yt_api_key, function(error, response, body) {
-                var json = JSON.parse(body);
-                var arr = [];
-                json.items.forEach(function (e) {
-                    arr.push(e);
-                });
-                cb(arr.filter(function (a) {
-                    return a.snippet.title.toLowerCase() !== "private video" && a.snippet.title.toLowerCase() !== "deleted video";
-                }));
-            });
-        },
-        getPlayListMetaData: function (id, max, cb) {
-            request("https://www.googleapis.com/youtube/v3/playlists?part=snippet%2C+contentDetails&id=" + id + "&maxResults=" + max + "&key=" + yt_api_key, function(error, response, body) {
-                cb(JSON.parse(body).items[0]);
-            });
-        }
-    };
-
-    
 
 });
