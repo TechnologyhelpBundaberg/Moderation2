@@ -289,12 +289,31 @@ client.on(`message`, function (message) {
     .setTitle("Vortex V2 Running **V0.1.6**")
     .addField("Created by:", "-=l=- UnknowN -=l=-#1026 ")
     .addField("Run by:", "Discord.js")
-    .addField("Uptime:", client.uptime + "ms");
+    .addField("Uptime:", client.uptime + "ms")
+    .addField(`User Ping:`, `(took: ${message.createdTimestamp - message.createdTimestamp}ms)`)
     message.channel.send({embed})
   }
 
-
+  if (message.content.startsWith(prefix + "countdown")) {
+    let i = 30;
+    message.channel.sendMessage("Countdown: " + i + "s").then(message => {
+        var countInterval = setInterval(() => {
+          if(i === 10) {
+            message.edit(i = "Countdown complete.");
+            return clearInterval(countInterval);
+          }
+          message.edit("Countdown: " + (i = i - 10) + "s")
+        }, 10000);
+      })
+    }
    
+    if (message.content.startsWith("stfu")) {
+      message.channel.send("stfu")
+      message.channel.send("stfu")
+      message.channel.send("stfu")
+    }
+
+
     })
 
 });
