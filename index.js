@@ -4,7 +4,7 @@ const http = require("http");
 
 const app = express();
 
-port = process.env.PORT || 3000;
+port = process.env.PORT || 5000;
 
 app.set('view engine', 'ejs');
 
@@ -43,6 +43,8 @@ require('./util/eventLoader')(client);
 
 var config = JSON.parse(fs.readFileSync(`./settings.json`, `utf-8`));
 
+var cmdprefix = "!!"
+
 const yt_api_key = config.yt_api_key
 const bot_controller = config.bot_controller;
 const prefix = config.prefix;
@@ -60,6 +62,10 @@ client.on(`ready`, function () {
   setTimeout(function(){
     console.log(`Now With Muting! Do Vortex, mute @{usernameHere}`)
   },1000);
+
+client.user.setActivity("Vortex, |-| !!cmds")
+
+client.user.setStatus("dnd")
 
 client.on(`guildMemberAdd`, member => {
     let guild = member.guild;
@@ -307,7 +313,50 @@ client.on(`message`, function (message) {
       })
     }
   
+    if(message.content.startsWith(cmdprefix + 'cmds')){
+      message.channel.send({embed: {
+      color: 0x00AE86,
+        author: {
+          name: message.member.user.username,
+          icon_url: message.member.user.avatarURL
+        },
+        fields: [{
+        name: `Current Commands`,
+        value: `• ping
+  • membercount`
+        },
+        {
+        name: `Music Commands`,
+        value: `• NULL **Awaiting Music Input Commands**`
+        },
+        {
+        name: `Info`,
+        value: `• version`
+        },
+        {
+        name: `Helpful Commands`,
+        value: `• cmds`
+        },
+        {
+        name: `Admin Commands`,
+        value: `• purge
+  • mute`
+        },
+        {
+        name: `Roblox Commands`,
+        value: `• rblxlt2
+  • rblxmm`
+        },
+        {
+        name: `Prefix to Commands`,
+        value: `Vortex, **"Command Here"**`
+        }]
+      }});
+    }
 
+    if (message.content.startsWith(prefix + "version")) {
+      message.channel.send("Vortex v2, ***0.1.6*** Last command and things added **!!cmds** & **Muting capabilities** & **New setActivity Now Working!**")
+    }
 
 
 
