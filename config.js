@@ -1,5 +1,6 @@
 const config = {
     "ownerID": "257673064446164992",
+    "coscripterID": "240965846480977920",
     "admins": [], // Do not touch
     "mods": [], // Do not touch
 
@@ -67,7 +68,13 @@ const config = {
         // },
 
         {
-            level: 10,
+            level: 8,
+            name: "Co Scripters",
+            check: (message) => message.client.config.coscripterID === message.author.id
+        }
+
+        {
+            level: 50,
             name: "Bot Owner",
             check: (message) => message.client.config.ownerID === message.author.id
         }

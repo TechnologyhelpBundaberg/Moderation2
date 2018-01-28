@@ -22,5 +22,5 @@ exports.run = async (bot, message, args, level) => { // eslint-disable-line no-u
     category: "System",
     aliases: ["eval", "ev"],
     usage: "eval [...code]",
-    permlevel: 10
+    permlevel: 8
   };
