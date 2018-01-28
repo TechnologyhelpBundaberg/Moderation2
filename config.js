@@ -21,7 +21,7 @@ const config = {
 
     permLevels: [
         {
-            level: 0,
+            level: 1,
             name: "User",
             check: () => true
         },
@@ -34,6 +34,12 @@ const config = {
 
         {
             level: 2,
+            name: "High Member",
+            check: () => true
+        },
+
+        {
+            level: 4,
             name: "Moderator",
             check: (message) => {
                 try {
@@ -50,7 +56,7 @@ const config = {
         */
 
         {
-            level: 3,
+            level: 5,
             name: "Administrator",
             check: (message) => {
                 try {

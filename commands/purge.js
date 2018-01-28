@@ -3,7 +3,7 @@ module.exports.run = function(client, message, args, level) {
     if(message.member.roles.has(adm.id)) {
        var messagecount = args;
         message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
-        message.channel.send(`I Have ${messagecount} messages with purge.`);
+        message.channel.send(`I have purged *** ${messagecount} *** messages with purge.`);
     }
 }
 
