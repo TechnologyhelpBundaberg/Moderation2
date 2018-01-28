@@ -71,7 +71,7 @@ const config = {
             level: 8,
             name: "Co Scripters",
             check: (message) => message.client.config.coscripterID === message.author.id
-        }
+        },
 
         {
             level: 50,
