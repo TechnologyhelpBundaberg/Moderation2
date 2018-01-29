@@ -49,6 +49,14 @@ module.exports.run = function(client, message, args, level) {
             value: `**100!**`
           },
           {
+            name: `Welcome Message`,
+            value: "```True```"
+          },
+          {
+            name: `Leaving Message`,
+            value: "```True```"
+          },
+          {
             name: `Discord Invite Link`,
             value: `**Invite As Many People As You Can And Get A Free Role! Heres The Code:** https://discord.gg/SaFMYmj`
           },]

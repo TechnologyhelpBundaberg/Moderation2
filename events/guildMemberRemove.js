@@ -1,7 +1,11 @@
 module.exports = member => {
-    // let guild = member.guild;
-    // let serverlogs = member.guild.channels.find('name', 'server-logs')
-    // let mainchannel = member.guild.channels.find('name', 'general')
-    // if(!serverlogs) return mainchannel.send('Cannot find `server-logs` channel');
-    // serverlogs.send(`GG ${member.user} You Left And I think No One Cared!`)
+    const settings = client.config.defaultSettings
+
+    if (settings.leavingEnabled !== "true") return;
+
+    const leavingEnabled = settings.welcomeMessage.replace("{{user}}", member.user);
+    member.guild.channels.find("name", settings.welcomeChannel).send(leavingMessage).catch(console.error);
+
+    let serverMembers = member.guild.roles.find('name', settings.userRole);
+    member.addRole(serverMembers)
 }

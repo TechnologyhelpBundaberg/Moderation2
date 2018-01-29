@@ -9,11 +9,16 @@ const config = {
         "userRole": "Members",
         "systemNotice": "true",
         "modRole": "Moderator",
-        "adminRole": "Co-Owner",
+        "adminRole": "Administrator",
+        "coownerRole": "Co-Owner",
         "welcomeChannel": "server-logs",
         "mutedlogs": "muted-logs",
-        "welcomeMessage": "Welcome {{user}} to the guild :clap:!",
-        "welcomeEnabled": "true"
+        "kicklogs": "kick-logs",
+        "banLogs": "ban-unban-logs",
+        "welcomeMessage": "Welcome {{user}} To United Elite! Enjoy Your Stay :)",
+        "welcomeEnabled": "true",
+        "leavingMessage": "Goodbye {{user}} I Hope You Enjoyed. Its Sad To See You Go :(",
+        "leavingEnabled": "true"
 
     },
 
