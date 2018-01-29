@@ -41,13 +41,17 @@ module.exports.run = function(client, message, args, level) {
           value: `**Command Handlers! Also Eval For The Co-Scripter And The Owner**`
           },
           {
-            name: `Member Goal`,
-            value: `**100!**`
-            },
-          {
           name: `Before Latest Update`,
           value: `**Muting Capablities Do Vortex, mute <usernamehere>**`
-          }]
+          },
+          {
+            name: `Member Goal`,
+            value: `**100!**`
+          },
+          {
+            name: `Discord Invite Link`,
+            value: `**Invite As Many People As You Can And Get A Free Role! Heres The Code:** https://discord.gg/SaFMYmj`
+          },]
         }});
 }
 
