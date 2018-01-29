@@ -41,6 +41,10 @@ module.exports.run = function(client, message, args, level) {
           value: `**Command Handlers! Also Eval For The Co-Scripter And The Owner**`
           },
           {
+            name: `Member Goal`,
+            value: `**100!**`
+            },
+          {
           name: `Before Latest Update`,
           value: `**Muting Capablities Do Vortex, mute <usernamehere>**`
           }]
