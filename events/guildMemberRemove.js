@@ -1,11 +1,15 @@
-module.exports = member => {
-    const settings = client.config.defaultSettings
+module.exports = (client, member) => {
 
-    if (settings.leavingEnabled !== "true") return;
+    // const leavingMessage = client.config.defaultSettings
+    // const settings = client.config.defaultSettings
 
-    const leavingEnabled = settings.welcomeMessage.replace("{{user}}", member.user);
-    member.guild.channels.find("name", settings.welcomeChannel).send(leavingMessage).catch(console.error);
+    // if (settings.leavingEnabled !== "true") return;
 
-    let serverMembers = member.guild.roles.find('name', settings.userRole);
-    member.addRole(serverMembers)
+    // const leavingEnabled = settings.welcomeMessage.replace("{{user}}", member.user);
+    // member.guild.channels.find("name", settings.welcomeChannel).send(leavingMessage).catch(console.error);
+
+    // let serverMembers = member.guild.roles.find('name', settings.userRole);
+    // member.addRole(serverMembers)
+
+
 }

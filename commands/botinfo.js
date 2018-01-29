@@ -54,7 +54,7 @@ module.exports.run = function(client, message, args, level) {
           },
           {
             name: `Leaving Message`,
-            value: "```True```"
+            value: "```False```"
           },
           {
             name: `Discord Invite Link`,
