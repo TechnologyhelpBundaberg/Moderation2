@@ -8,8 +8,8 @@ module.exports.run = function(client, message, args, level) {
           fields: [{
           name: `Current Commands`,
           value: `• ping
-    • membercount
-    • meep`
+• membercount
+• meep`
           },
           {
           name: `Music Commands`,
@@ -17,7 +17,8 @@ module.exports.run = function(client, message, args, level) {
           },
           {
           name: `Info`,
-          value: `• version`
+          value: `• version
+• botinfo`
           },
           {
           name: `Helpful Commands`,
@@ -26,12 +27,12 @@ module.exports.run = function(client, message, args, level) {
           {
           name: `Admin Commands`,
           value: `• purge
-    • mute`
+• mute`
           },
           {
           name: `Roblox Commands`,
           value: `• rblxlt2
-    • rblxmm`
+• rblxmm`
           },
           {
           name: `Prefix to Commands`,

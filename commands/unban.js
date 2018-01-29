@@ -1,7 +1,6 @@
 module.exports.run = function(client, message, args, level) {
     const reason = args.splice(1, args.length).join(' ');
 
-
     
     let banUnbanlogs = message.guild.channels.find('name', 'ban-unban-logs')
     let mainchannel = message.guild.channels.find('name', 'general')

@@ -1,12 +1,42 @@
 module.exports.run = function(client, message, args, level) {
-    const Discord = require('discord.js')
-    const embed = new Discord.RichEmbed()
-    .setTitle("Vortex V2 Running **V0.1.6**")
-    .addField("Created by:", "-=l=- UnknowN -=l=-#1026 ")
-    .addField("Run by:", "Discord.js")
-    .addField("Uptime:", client.uptime + "ms")
-    .addField(`User Ping:`, `(took: ${message.createdTimestamp - message.createdTimestamp}ms)`)
-    message.channel.send({embed})
+    // const Discord = require('discord.js')
+    // const embed = new Discord.RichEmbed()
+    // .setTitle("Vortex V2 Running **V0.1.7**")
+    // .addField("Creators ID's:", " **257673064446164992** ", " AKA ", "**UnknowN**", " & ", " **240965846480977920** ", " AKA ", "**Riptides**")
+    // .addField("Run by:", "Discord.js")
+    // .addField("Uptime:", client.uptime + "ms")
+    // .addField(`User Ping:`, `(took: ${message.createdTimestamp - message.createdTimestamp}ms)`)
+    // .addField(`Latest Update:`, `**Command Handlers! Also Eval For The Co-Scripter And The Owner**`)
+    // .addField(`Before Latest Update:`, "**Muting Capablities Do Vortex, mute <usernamehere>**")
+    // message.channel.send({embed})
+
+    message.channel.send({embed: {
+        color: 0x00AE86,
+          author: {
+            name: message.member.user.username,
+            icon_url: message.member.user.avatarURL
+          },
+          fields: [{
+          name: `Vortex V2`,
+          value: `**V0.1.7**`
+          },
+          {
+          name: `Creators ID's`,
+          value: `**257673064446164992**, AKA, **UnknowN**, &, **240965846480977920**, AKA, **Riptides**`
+          },
+          {
+          name: `Run by`,
+          value: `**Discord.js**`
+          },
+          {
+          name: `Latest Update`,
+          value: `**Command Handlers! Also Eval For The Co-Scripter And The Owner**`
+          },
+          {
+          name: `Before Latest Update`,
+          value: `**Muting Capablities Do Vortex, mute <usernamehere>**`
+          }]
+        }});
 }
 
 module.exports.conf = {

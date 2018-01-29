@@ -2,7 +2,9 @@ exports.run = function(client, message, args, level) {
     let mutedlogs = message.guild.channels.find('name', 'muted-logs')
     let mainchannel = message.guild.channels.find('name', 'general')
     if(!mutedlogs) return mainchannel.send('Cannot find **muted-logs** channel');
-    
+    const reason = args.splice(1, args.length).join(' ');
+    client.muteReason = reason;
+
     message.channel.send("Do you want to mute " + message.mentions.users.first() + "?  *Reply with* ***Yes*** *or* ***No***")
     collector = message.channel.createMessageCollector(m => m.author.id === message.author.id && m.channel.id === message.channel.id, {time : 15000}); // Create the message collector locked to the author in the message channel.
     collector.on('collect', collected => { // When a message is collected, this event triggers.
