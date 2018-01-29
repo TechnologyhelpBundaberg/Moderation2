@@ -29,6 +29,14 @@ module.exports.run = function(client, message, args, level) {
           value: `**Discord.js**`
           },
           {
+            name: `Uptime`,
+            value: `${client.uptime} "ms"`
+          },
+          {
+            name: `User Ping`,
+            value: `Took: ${message.createdTimestamp - message.createdTimestamp}ms`
+          },
+          {
           name: `Latest Update`,
           value: `**Command Handlers! Also Eval For The Co-Scripter And The Owner**`
           },
