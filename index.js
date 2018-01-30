@@ -30,6 +30,11 @@ app.listen(port, () => {
     
     }, 900000);
 
+    var i = setInterval(function(){
+      // do your thing
+      https.get('https://git.heroku.com/vortexv2.git')
+    }, 420000);
+
 const Discord = require(`discord.js`);
 const client = new Discord.Client();
 const ytdl = require(`ytdl-core`);
